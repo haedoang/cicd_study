@@ -19,7 +19,7 @@ public class Application {
 
     @GetMapping("api/v1/profiles")
     public String getProfiles() {
-        return Arrays.toString(env.getActiveProfiles());
+        return "this Profiles are " + Arrays.toString(env.getActiveProfiles());
     }
 
 
