@@ -16,8 +16,8 @@
 
 1. `commit` 이 수행되면 `Dockerfile` 을 사용하여 애플리케이션을 빌드합니다
 2. 빌드한 애플리케이션을 `dockerhub` 이미지에 업로드합니다
-3. 원격지 서버에 접속하여 `[deploy.sh](http://deploy.sh)` 파일을 실행합니다
-4. `[deploy.sh](http://deploy.sh)` 에서는 새 이미지를 다운받아 실행중이지 않은 컨테이너에 이미지를 반영합니다
+3. 원격지 서버에 접속하여 `deploy.sh` 파일을 실행합니다
+4. `deploy.sh` 에서는 새 이미지를 다운받아 실행중이지 않은 컨테이너에 이미지를 반영합니다
 5. 반영된 이미지로 로드밸런서 설정을 변경합니다
 6. 기존 실행중이었던 컨테이너를 종료합니다
 
@@ -198,7 +198,7 @@ ubuntu@ip-172-31-35-4:~$ curl localhost
 
 - `~/app/` 아래 파일을 생성한다
 
-6-1) `docker-compose.green.yml` 
+6-1) docker-compose.green.yml
 
 ```bash
 version: "3.7"
@@ -212,7 +212,7 @@ services:
           SPRING_PROFILES_ACTIVE: green
 ```
 
-6-2) `docker-compose.blue.yml` 
+6-2) docker-compose.blue.yml
 
 ```bash
 version: "3.7"
@@ -226,7 +226,7 @@ services:
           SPRING_PROFILES_ACTIVE: blue
 ```
 
-6-3) `[deploy.sh](http://deploy.sh)` 
+6-3) deploy.sh
 
 ```bash
 #!/bin/bash
@@ -275,7 +275,7 @@ fi
 - 최신 도커 이미지를 가져온 후 구 이미지를 삭제한다
 - 현재 실행중인 컨테이너가 `blue` , `green` 에 따라 분기를 타면서 nginx proxy path를 변경해준다
 
-6-4) `[deploy.sh](http://deploy.sh)` 실행하기
+6-4) `deploy.sh` 실행하기
 
 ![Untitled](images/Untitled%207.png)
 
