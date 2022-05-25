@@ -10,9 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Check out code
-
-      - name:  ls -al
-        run: ls -al
         
       - name: update permission
         run: chmod 755 ./gradlew
