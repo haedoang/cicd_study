@@ -6,3 +6,7 @@ Run
 
 Build
 > docker build -t haedoang/testwebapp .
+
+push 
+> docker push haedoang/testwebapp:latest
+
