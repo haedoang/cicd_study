@@ -135,7 +135,7 @@ jobs:
 
  `re-run job` 수행하여 환경 설정이 잘 되었는지 확인한다
 
-- `[deploy.sh](http://deploy.sh)` 실행 결과를 출력하는 지 확인한다
+- `deploy.sh` 실행 결과를 출력하는 지 확인한다
 
 ![Untitled](images/Untitled%205.png)
 
