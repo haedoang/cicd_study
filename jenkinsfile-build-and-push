@@ -10,6 +10,7 @@ node {
             sh 'ls -al ./build'
         }
     }
+
     stage('dockerized') {
         steps{
             sh 'docker build . -t haedoang/cicd-study'
@@ -19,5 +20,6 @@ node {
     stage('deploy') {
         steps {
            sh 'docker run --name cicd_study -d -p 8080:8080 haedoang/cicd_study'
+        }
     }
 }
