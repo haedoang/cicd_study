@@ -12,9 +12,7 @@ node {
     }
 
     stage('dockerized') {
-
-            sh 'docker build . -t haedoang/cicd-study'
-
+        app = docker.build("haedoang/cicd_study")
     }
 
     stage('deploy') {
