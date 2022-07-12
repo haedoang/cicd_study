@@ -1,44 +1,48 @@
-node {
-  stage('========== Clone repository ==========') {
-    checkout scm
-  }
+pipeline {
+  agent any
 
-  stage('========= Build Gradle ==========') {
-        steps {
-            sh 'chmod +x gradlew'
-            sh  './gradlew clean build -x test'
-            sh 'ls -al ./build'
-        }
-        post {
-            success {
-                echo 'gradle build success'
-            }
+  stages {
+    stage('========== Clone repository ==========') {
+          checkout scm
+    }
 
-            failure {
-                echo 'gradle build failed'
-            }
-        }
-  }
-
-  stage('dockerize'){
-      steps{
-          sh 'docker build . -t haedoang/cicd-study'
-      }
-  }
-
-  stage('deploy') {
+    stage('========= Build Gradle ==========') {
       steps {
-          sh 'docker run --name cicd_study -d -p 8080:8080 haedoang/cicd_study'
+          sh 'chmod +x gradlew'
+          sh  './gradlew clean build -x test'
+          sh 'ls -al ./build'
       }
-
       post {
           success {
-              echo 'success'
+              echo 'gradle build success'
           }
 
           failure {
-              echo 'failed'
+              echo 'gradle build failed'
           }
       }
+    }
+
+    stage('dockerized'){
+        steps{
+            sh 'docker build . -t haedoang/cicd-study'
+        }
+    }
+
+    stage('deploy') {
+        steps {
+            sh 'docker run --name cicd_study -d -p 8080:8080 haedoang/cicd_study'
+        }
+
+        post {
+            success {
+                echo 'success'
+            }
+
+            failure {
+                echo 'failed'
+            }
+        }
+    }
   }
 }
