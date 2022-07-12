@@ -2,13 +2,43 @@ node {
   stage('========== Clone repository ==========') {
     checkout scm
   }
-  stage('========== Build image ==========') {
-    app = docker.build("haedoang/cicd_study")
+
+  stage('========= Build Gradle ==========') {
+        steps {
+            sh 'chmod +x gradlew'
+            sh  './gradlew clean build -x test'
+            sh 'ls -al ./build'
+        }
+        post {
+            success {
+                echo 'gradle build success'
+            }
+
+            failure {
+                echo 'gradle build failed'
+            }
+        }
   }
-  stage('========== Push image ==========') {
-    docker.withRegistry('https://registry.hub.docker.com', 'haedoang') {
-      app.push("${env.BUILD_NUMBER}")
-      app.push("latest")
-    }
+
+  stage('dockerize'){
+      steps{
+          sh 'docker build . -t haedoang/cicd-study'
+      }
+  }
+
+  stage('deploy') {
+      steps {
+          sh 'docker run --name cicd_study -d -p 8080:8080 haedoang/cicd_study'
+      }
+
+      post {
+          success {
+              echo 'success'
+          }
+
+          failure {
+              echo 'failed'
+          }
+      }
   }
 }
