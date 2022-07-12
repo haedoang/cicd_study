@@ -1,0 +1,9 @@
+ node {
+     stage('Clone repository') {
+         checkout scm
+     }
+
+     stage('Build image') {
+         app = docker.build("haedoang/cicd_study:$BUILD_NUMBER")
+     }
+}
