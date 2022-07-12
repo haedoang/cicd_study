@@ -4,6 +4,6 @@
      }
 
      stage('Build image') {
-         app = docker.build("haedoang/cicd_study")
+         app = docker.build("haedoang/cicd_study:latest")
      }
 }
