@@ -18,8 +18,8 @@ node {
     }
 
     stage('deploy') {
-
-           sh 'docker run --name cicd_study -d -p 8080:8080 haedoang/cicd_study'
-
+        docker.withRegistry('https://registry.hub.docker.com', 'haedoang') {
+            app.push("latest");
+        }
     }
 }
