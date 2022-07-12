@@ -2,11 +2,27 @@ pipeline {
   agent any
 
   stages {
-    stage('========== Clone repository ==========') {
+    agent any
+
+    stage('Prepare') {
           checkout scm
     }
 
-    stage('========= Build Gradle ==========') {
+    post {
+        success {
+            echo 'prepare success'
+        }
+
+        always {
+            echo 'done prepare'
+        }
+
+        cleanup {
+            echo 'after all other post conditions'
+        }
+    }
+
+    stage('Build Gradle') {
       steps {
           sh 'chmod +x gradlew'
           sh  './gradlew clean build -x test'
@@ -23,7 +39,7 @@ pipeline {
       }
     }
 
-    stage('dockerized'){
+    stage('dockerized') {
         steps{
             sh 'docker build . -t haedoang/cicd-study'
         }
