@@ -17,6 +17,11 @@ public class Application {
         this.env = env;
     }
 
+    @GetMapping
+    public String index() {
+        return "Hello world";
+    }
+
     @GetMapping("api/v1/profiles")
     public String getProfiles() {
         return "this Profiles are " + Arrays.toString(env.getActiveProfiles());
