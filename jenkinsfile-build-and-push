@@ -12,7 +12,7 @@ node {
     }
 
     stage('dockerized') {
-        app = docker.build("haedoang/cicd_study")
+        app = docker.build("haedoang/testwebapp")
     }
 
     stage('deploy') {
